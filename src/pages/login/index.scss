@@ -1,0 +1,29 @@
+$primary-color: #3498db;
+$background-color: #f5f5f5;
+$text-color: #333;
+$border-radius: 5px;
+body {
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+
+.login-logo {
+  margin-bottom: 20px;
+  width: 300px; /* 可以根据实际logo大小调整 */
+  height: auto;
+}
+
+.login-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  text-align: center;
+}

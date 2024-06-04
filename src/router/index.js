@@ -1,7 +1,7 @@
 import Layout from '../pages/layout'
 import Login from '../pages/login'
 
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createBrowserRouter} from "react-router-dom"
 
 const  router = createBrowserRouter([
     {
