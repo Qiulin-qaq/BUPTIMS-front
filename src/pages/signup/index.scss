@@ -12,24 +12,24 @@ body {
   height: 100vh;
 }
 
-//.login-wrapper {
-//
-//  background-size: cover;
-//  background-position: center;
-//  height: 100vh; /* 确保高度覆盖整个视窗 */
-//  width: 100vw; /* 确保宽度覆盖整个视窗 */
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//}
+.signup-wrapper {
+  background-image: url('../../assets/loginbackgroud.svg'); /* 替换为你的背景图片路径 */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* 确保高度覆盖整个视窗 */
+  width: 100vw; /* 确保宽度覆盖整个视窗 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.login-logo {
+.signup-logo {
   margin-bottom: 20px;
   width: 300px; /* 可以根据实际logo大小调整 */
   height: auto;
 }
 
-.login-container {
+.signup-container {
   background: #fff;
   padding: 20px;
   border-radius: $border-radius;
