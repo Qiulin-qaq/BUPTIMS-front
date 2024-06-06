@@ -1,10 +1,14 @@
-import "bootstrap/dist/css/bootstrap.css"
-import $ from 'jquery';
-import Popper from 'popper.js';
+import React from 'react';
+import "./index.scss"
+
+
+
 const Layout = () => {
     return (
-        <div>adadad</div>
-)
+        <>
+        </>
+    )
 }
+export default Layout;
 
-export default Layout
+
