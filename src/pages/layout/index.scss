@@ -1,0 +1,12 @@
+.header {
+  position: fixed; /* 固定位置，使其始终在视口顶部 */
+  top: 0; /* 顶部对齐 */
+  left: 0; /* 左侧对齐 */
+  width: 100%; /* 宽度占满整个视口宽度 */
+  height: 85px; /* 高度，可以根据需要进行调整 */
+  background-color: cornflowerblue; /* 背景颜色，这里使用的是浅灰色，你可以设置成任何颜色 */
+  z-index: 1000; /* 高层级，确保 header 在页面中其他内容的上方 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* 给header添加阴影效果，增加立体感和视觉分割效果 */
+}
+
+
