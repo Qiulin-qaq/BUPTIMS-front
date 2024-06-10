@@ -4,7 +4,7 @@ import Signup from '../pages/signup'
 
 import {createBrowserRouter} from "react-router-dom"
 
-const  router = createBrowserRouter([
+const router = createBrowserRouter([
     {
         path: "/home/display",
         element: <Home/>
