@@ -30,9 +30,15 @@ const Login = () => {
                 withCredentials: true
             });
             console.log('Response:', response);  // 打印响应以进行调试
-            if (response.status === 200) {
+            if (response.status === 200 && response.data.token) {
+                localStorage.setItem('token', response.data.token);
                 message.success('登录成功');
-                navigate('/display'); // 跳转到登录后的页面
+                if (response.data.is_admin) {
+                    navigate('/adminLayout')
+                } else {
+                    navigate('/display'); // 跳转到登录后的页面
+                }
+
             } else {
                 message.error('登录失败，请检查用户名和密码');
             }

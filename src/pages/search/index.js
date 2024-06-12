@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Layout, Row, Col, Image, Space, Card, Pagination, message } from 'antd';
+import { Input, Layout, Row, Col, Image, Space, Card, message } from 'antd';
 import axios from 'axios';
 import logo from '../../assets/logo.png';
 import './index.scss';
 import { Content, Header } from "antd/es/layout/layout";
+import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 const { Search } = Input;
 
-const Home = () => {
+const SearchPage = () => {
   const [news, setNews] = useState([]);
-  const [page, setPage] = useState(1);
-  const [totalItems, setTotalItems] = useState(0);
+  const { keyword } = useParams();
   const navigate = useNavigate();
 
-  const fetchNews = async (page) => {
+  const fetchNews = async (keyword) => {
     try {
-      const token = localStorage.getItem('token'); // 获取存储在 localStorage 中的 token
-      const response = await axios.get(`http://localhost:8000/home/display?page=${page}`, {
+      const token = localStorage.getItem('token');
+      const response = await axios.get(`http://localhost:8000/home/search`, {
+        params: { keyword },
         headers: {
-          'token': `${token}` // 设置请求头
+          'token': `${token}`
         }
       });
-      console.log('Response:', response.data); // 打印响应以进行调试
+      console.log('Response:', response.data);
       setNews(response.data.news);
-      setPage(response.data.page);
-      setTotalItems(response.data.len * 10); // 假设每页10条新闻
     } catch (error) {
       console.error('Error fetching news:', error);
       message.error('获取新闻失败，请稍后再试');
@@ -33,16 +32,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchNews(page);
-  }, [page]);
+    fetchNews(keyword);
+  }, [keyword]);
 
   const onSearch = (value) => {
     console.log('Search:', value);
     navigate(`/search/${value}`);
-  };
-
-  const handlePageChange = (page) => {
-    setPage(page);
   };
 
   const handleTitleClick = (id) => {
@@ -72,10 +67,10 @@ const Home = () => {
           </Row>
         </div>
       </Header>
-      <Content className="content" style={{ padding: '0 50px', marginTop: '1900px' }}>
+      <Content className="content" style={{ padding: '0 50px', marginTop: '100px' }}>
         <div style={{ marginTop: '20px' }}>
-          <Row gutter={[16, 16]} style={{ marginTop: '120px' }}>
-            {news.map((item, index) => (
+          <Row gutter={[16, 16]}>
+            {(news || []).map((item, index) => (
               <Col key={index} span={24} className="card-container">
                 <Card title={<a onClick={() => handleTitleClick(item.id)}>{item.title}</a>} bordered={false}>
                   <p>{item.department}</p>
@@ -86,16 +81,9 @@ const Home = () => {
             ))}
           </Row>
         </div>
-        <Pagination
-          current={page}
-          total={totalItems}
-          pageSize={10}
-          onChange={handlePageChange}
-          style={{ textAlign: 'center', marginTop: 20 }}
-        />
       </Content>
     </Layout>
   );
 };
 
-export default Home;
+export default SearchPage;
