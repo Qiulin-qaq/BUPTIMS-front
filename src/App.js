@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Layout from './pages/layout';
 import Login from './pages/login'
 import Signup from './pages/signup'
-import PrivateRoute from './components/PrivateRoute';
-
+import SearchPage from './pages/search';
+import NewsDetail from './pages/newsDetail';
+import AdminHome from './pages/adminLayout';
 
 const App = () => {
   return (
@@ -14,9 +15,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* proctected */}
         <Route path="/display" element={<Layout />} />
-        {/* <Route path="/layout" element={<PrivateRoute><Layout /></PrivateRoute>} /> */}
+        <Route path="/search/:keyword" element={<SearchPage />} />
+        <Route path="/news/:id" element={<NewsDetail />} />
+        <Route path="/adminLayout" element={<AdminHome/>} />
       </Routes>
     </Router>
   );

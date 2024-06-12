@@ -1,12 +1,27 @@
 import React from 'react';
-import { Button, Card, Form, Input } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Card, Form, Input, message } from "antd";
+import { LockOutlined, UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import logo from "../../assets/logo.png";
 import './index.scss';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const onFinish = async (values) => {
-        console.log(values);
+        try {
+            const response = await axios.post('http://localhost:8000/user/signup', values);
+            if (response.status === 200) {
+                message.success('注册成功');
+                navigate('/login');
+            } else {
+                message.error('注册失败，请稍后再试');
+            }
+        } catch (error) {
+            console.error('注册错误:', error);
+            message.error('注册失败，请稍后再试');
+        }
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -32,6 +47,17 @@ const Signup = () => {
                         rules={[{ required: true, message: "用户名不能为空" }]}
                     >
                         <Input prefix={<UserOutlined />} size="large" placeholder="请输入用户名" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="phone"
+                        label="手机号"
+                        rules={[
+                            { required: true, message: "手机号不能为空" },
+                            { pattern: /^1[3-9]\d{9}$/, message: "请输入有效的手机号" }
+                        ]}
+                    >
+                        <Input prefix={<PhoneOutlined />} size="large" placeholder="请输入手机号" />
                     </Form.Item>
 
                     <Form.Item
@@ -66,7 +92,7 @@ const Signup = () => {
                         offset: 4,
                         span: 15
                     }}>
-                        <Button shape={"round"} type="primary" htmlType="submit" size="large" href={"/user/login"} block>
+                        <Button shape={"round"} type="primary" htmlType="submit" size="large" block>
                             注册
                         </Button>
                     </Form.Item>
